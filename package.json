@@ -1,0 +1,22 @@
+{
+  "name": "alex.cheng",
+  "version": "1.0.0",
+  "description": "node.js and mongodb learning",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CHL514/alex.cheng.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CHL514/alex.cheng/issues"
+  },
+  "homepage": "https://github.com/CHL514/alex.cheng#readme",
+  "dependencies": {
+    "mongoose": "^5.4.17"
+  }
+}
