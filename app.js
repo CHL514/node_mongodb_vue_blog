@@ -1,5 +1,5 @@
 const http = require('http')
-const Account = require('./model')
+const Account = require('./src/model')
 
 const server = http.createServer(function(request, response) {
   if (request.url === '/') {
@@ -7,9 +7,10 @@ const server = http.createServer(function(request, response) {
       "Content-Type": "text/html"
     })
 
-    response.end('Hello node')
+    response.end('Hello node mongodb')
   }
 })
 
+console.log('server is starting ...')
 server.listen(3000)
 
