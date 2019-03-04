@@ -1,0 +1,19 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+div.home-wrapper {
+  width: 100%;
+  height: 100vh;
+  background-color: #ccc;
+  background-image: url('../images/home_bg.jpg');
+  background-size: 100% 100%;
+  background-position: top left;
+  background-repeat: no-repeat;
+}
+div.home-wrapper h1 {
+  color: #fff;
+  text-align: center;
+  line-height: 400px;
+}

@@ -1,14 +1,25 @@
 const http = require('http')
-const Account = require('./src/model')
+const fs = require('fs')
+const Model = require('./mongodb')
 
+
+let dir_url = './'
 const server = http.createServer(function(request, response) {
-  if (request.url === '/') {
-    response.writeHead(200, {
-      "Content-Type": "text/html"
-    })
-
-    response.end('Hello node mongodb')
+  let url = 'views/index.html'
+  if (request.url !== '/') {
+    url = request.url
   }
+
+  console.log('路径:', dir_url+url)
+
+  fs.readFile(dir_url + url, function(err, data) {
+    if (err) {
+      return response.end('404 not Found .')
+    } else {
+      console.log('请求成功 !')
+      response.end(data)
+    }
+  })
 })
 
 console.log('server is starting ...')
