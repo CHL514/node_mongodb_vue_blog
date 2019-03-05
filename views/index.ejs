@@ -5,50 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>HOME</title>
-  <!-- <link rel="stylesheet" href="../static/css/home.css"> -->
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 <body>
-  <div class="home-wrapper">
-    name: <input class="username" type="text" /><br>
-    passworld: <input class="password" type="text" /><br>
-    <button id="addBtn">add</button>
-    <ul>
-      <% datas.forEach(item => { %>
-        <li class="oLi"><%= item.username %></li>
-      <% }) %>
-    </ul>
+  <div>
+    my personal webSite.
+    <h1>
+      基于node+express and mongodb
+    </h1>
   </div>
 
   <script>
-    window.onload = function() {
-      axios.defaults.baseURL = 'http://127.0.0.1:3000/';
-      axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
-
-      var addBtn = document.getElementById('addBtn')
-      var username = document.getElementsByClassName('username')[0]
-      var password = document.getElementsByClassName('password')[0]
-      var oLis = document.getElementsByClassName('oLi')
-
-      addBtn.addEventListener('click', function() {
-        axios.post('/add', {
-          username: username.value,
-          password: password.value,
-          isadmin: false
-        }).then(res => {
-          console.log(res);
-        })
-      })
-
-      for(let i = 0; i < oLis.length; i ++) {
-        oLis[i].addEventListener('click', function() {
-          alert('刪除 !')
-          axios.post('/delete', {
-            username: this.innerHTML.trim()
-          })
-        })
-      }
-    }
   </script>
 </body>
 </html>
