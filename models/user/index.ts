@@ -18,8 +18,8 @@ const adminSchema = new Schema({
 
 adminSchema.index({id: 1});
 
-const Admin = mongoose.model('Admin', adminSchema);
+const User = mongoose.model('User', adminSchema);
 
 
 // 在路由中引入
-export default Admin
+module.exports = User

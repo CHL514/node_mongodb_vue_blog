@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-mongoose.connect('mongodb://localhost:27017/user', {useNewUrlParser: true})
+mongoose.connect('mongodb://localhost:27017/myBlog', {useNewUrlParser: true})
 
 module.exports = mongoose.model('User', new mongoose.Schema({
   username: {
@@ -11,7 +11,7 @@ module.exports = mongoose.model('User', new mongoose.Schema({
     type: String,
     required: true
   },
-  email: {
-    type: String
+  isadmin: {
+    type: Boolean
   }
 }))
