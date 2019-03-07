@@ -28,5 +28,5 @@
 
 ```
 
-#### npm start
+#### npm server
 

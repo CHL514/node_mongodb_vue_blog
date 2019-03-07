@@ -21,7 +21,7 @@ export default {
   created () {
     let data = this.$route.query.data
     console.log('回到首页:', data)
-    if (data !== "[object Object]") {
+    if (data) {
       this.homeTile = this.$route.query.data.title
     }
   },
