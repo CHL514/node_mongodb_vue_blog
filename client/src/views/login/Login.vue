@@ -1,8 +1,8 @@
 <template>
 	<div class="login-wrapper">
 		<Form class="login-form" ref="formInline" :model="formInline" :rules="ruleInline">
-			<FormItem prop="user">
-				<Input class="login-input" type="text" v-model="formInline.user" placeholder="Username">
+			<FormItem prop="username">
+				<Input class="login-input" type="text" v-model="formInline.username" placeholder="Username">
 					<Icon type="ios-person-outline" slot="prepend"></Icon>
 				</Input>
 			</FormItem>
@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import request from '../../utils/request.js'
+import { mapActions } from 'vuex'
 
 export default {
 	name: 'Login',
@@ -38,11 +38,11 @@ export default {
 		return {
 			loading: false,
 			formInline: {
-				user: '',
+				username: '',
 				password: ''
 			},
 			ruleInline: {
-				user: [
+				username: [
 					{ required: true, message: 'Please fill in the user name', trigger: 'blur' }
 				],
 				password: [
@@ -53,40 +53,29 @@ export default {
 		}
 	},
 	methods: {
-		handleSubmit(name) {
-			this.loading = true
+		...mapActions([
+			'handleLogin'
+		]),
+		handleSubmit (name) {
 			this.$refs[name].validate((valid) => {
 				if (valid) {
-					setTimeout(() => {
-						request({
-							url: '/login',
-							method: 'post',
-							data: this.formInline
-						}).then(res => {
-							this.loading = false
-							if (res.data.status === 200) {
-								this.$Message.success('Success!')
-								console.log('res', res)
-								this.$router.push({
-									name: 'Home',
-									params: res.data
-								})
-							} else {
-								this.$Message.error(res.data.message)
-							}
-						}).catch(err => {
-							this.loading = false
-							this.$Message.error('Login Fail !')
-							console.log('err', err)
+					this.loading = true
+					this.handleLogin(this.formInline).then(userInfo => {
+						this.loading = false
+						console.log('userInfo', userInfo)
+						this.$router.push({
+							path: '/'
 						})
-					}, 2000)
+					}).catch(err => {
+						this.loading = false
+						this.$Message.error('login fail ' + err)
+					})
 				} else {
-					this.loading = false
 					this.$Message.error('Please fill in the user name and password !')
 				}
 			})
 		},
-		signin(name) {
+		signin (name) {
 			console.log(name)
 		}
 	}

@@ -13,7 +13,7 @@ router.get('/', function(req, res) {
 
 router.post('/login', function(req, res) {
 	
-	if (req.body.user === 'alex.cheng') {
+	if (req.body.username === 'alex.cheng') {
 		// 表明登录成功
 		res.send({
 			status: 200,
