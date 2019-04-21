@@ -2,6 +2,10 @@ const express = require('express')
 const Course = require('../models/')
 const router = express.Router()
 
+// async 和 await
+// async 可以放到回调函数的前面哦，不需要再重新创建一个包装函数了啦 !!!
+// router.get('/getCourses', async (req, res) => { await Course.find() })
+
 router.get('/getCourses', function(req, res) {
 	async function getCourse() {
 		const course = await Course.find();
