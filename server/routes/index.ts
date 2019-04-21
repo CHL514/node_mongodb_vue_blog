@@ -6,21 +6,23 @@ const router = express.Router()
 // async 可以放到回调函数的前面哦，不需要再重新创建一个包装函数了啦 !!!
 // router.get('/getCourses', async (req, res) => { await Course.find() })
 
-router.get('/getCourses', function(req, res) {
-	async function getCourse() {
-		const course = await Course.find();
-		res.send({
-			status: 200,
-			data: {
-				message: 'all course datas',
-				content: course
-			}
-		})
+router.get('/getCourses', async (req, res) => {
+	const course = await Course
+	.find()
+	.sort('name'); // 排序
+	if (!course.length) {
+		return res.status(404).send('Here are no any courses, Please add course!')
 	}
-	getCourse()
+	res.send({
+		status: 200,
+		data: {
+			message: 'all course datas',
+			content: course
+		}
+	})
 })
 
-router.post('/login', function(req, res) {
+router.post('/login', (req, res) => {
 	if (req.body.username === 'alex.cheng') {
 		// 表明登录成功
 		res.send({
@@ -36,33 +38,31 @@ router.post('/login', function(req, res) {
 	}
 })
 
-router.delete('/deleteCourse', (req, res) => {
+router.delete('/deleteCourse', async (req, res) => {
 	console.log(req.body.id)
-	async function deleteCouse() {
-		const result = await Course.deleteOne({
-			_id: req.body.id
-		})
-		console.log(result);
-		res.send({
-			status: 200,
-			data: result
-		})
+	// 删除还可以用 findByIdAndRemove
+	const result = await Course.deleteOne({
+		_id: req.body.id
+	})
+	if (!result) {
+		return res.status(404).send('Delete Fail, Please delete again!')
 	}
-	deleteCouse()
+	console.log(result);
+	res.send({
+		status: 200,
+		data: result
+	})
 })
 
-router.post('/addCourse', (req, res) => {
+router.post('/addCourse', async (req, res) => {
 	const course = new Course(req.body);
-	async function modifyCourse() {
-		// 返回添加的数据
-		const result = await course.save();
-		console.log('result', result);
-		res.send({
-			status: 200,
-			content: result
-		})
-	}
-	modifyCourse()
+	// 返回添加的数据
+	const result = await course.save();
+	console.log('result', result);
+	res.send({
+		status: 200,
+		content: result
+	})
 })
 
 module.exports = router
