@@ -4,7 +4,8 @@ import { getToken, setToken} from '@/utils/userToken.js'
 
 export default {
   state: {
-    token: getToken()
+    token: getToken(),
+    user: ''
   },
   mutations: {
     setToken (state, token) {
