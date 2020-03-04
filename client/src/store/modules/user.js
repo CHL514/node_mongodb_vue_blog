@@ -1,6 +1,6 @@
 
 import request from '@/utils/request.js'
-import { getToken, setToken} from '@/utils/userToken.js'
+import { getToken, setToken } from '@/utils/userToken.js'
 
 export default {
   state: {

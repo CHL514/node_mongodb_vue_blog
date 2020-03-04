@@ -6,7 +6,7 @@ const app = express()
 const router = require('./routes/index.ts')
 
 app.use(express.static('F:/MY_PROJECTS/alex.cheng/client/dist'))
-app.use(bodyParser.urlencoded({ extended: false}))
+app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use(cors())
 

@@ -8,11 +8,11 @@ const router = express.Router()
 
 router.get('/getCourses', async (req, res) => {
 	const course = await Course
-	.find()
-	.sort('name'); // 排序
-	if (!course.length) {
-		return res.status(404).send('Here are no any courses, Please add course!')
-	}
+		.find()
+		.sort('name'); // 排序
+	// if (!course.length) {
+	// 	return res.status(404).send('Here are no any courses, Please add course!')
+	// }
 	res.send({
 		status: 200,
 		data: {
@@ -58,7 +58,6 @@ router.post('/addCourse', async (req, res) => {
 	const course = new Course(req.body);
 	// 返回添加的数据
 	const result = await course.save();
-	console.log('result', result);
 	res.send({
 		status: 200,
 		content: result
